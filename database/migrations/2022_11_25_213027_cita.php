@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->enum('rol',['user','admin']);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('citas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('cita')->unique();
+            $table->unsignedBigInteger('book_id');
             $table->timestamps();
+            $table->foreign('book_id')->references('id')->on('books')->onDelele('cascade')->onUpdate("cascade");
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('citas');
     }
 };
