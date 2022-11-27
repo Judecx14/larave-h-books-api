@@ -43,8 +43,8 @@ class FileController extends Controller
     }
 
     public function downloadFile($name){
-        if(Storage::disk('images')->exists($name)){
-            return Storage::disk('images')->download($name);
+        if(Storage::disk('pdfs')->exists($name)){
+            return Storage::disk('pdfs')->download($name);
         }
     }
 }

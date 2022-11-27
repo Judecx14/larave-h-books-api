@@ -16,6 +16,6 @@ class Cita extends Model
      */
     public function Book(): HasOne
     {
-        return $this->hasOne(User::class, 'id', 'book_id');
+        return $this->hasOne(Book::class);
     }
 }

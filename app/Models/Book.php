@@ -28,4 +28,14 @@ class Book extends Model
         return $this->hasOne(Cateory::class, 'id', 'category_id');
     }
 
+    /**
+     * Get the Cita that owns the Book
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Cita(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'book_id', 'id');
+    }
+
 }

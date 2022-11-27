@@ -28,7 +28,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/categories',[CategoriesController::class,'save']);
     Route::put('/categories/{id}',[CategoriesController::class,'update']);
     Route::delete('/categories/{id}',[CategoriesController::class,'delete']);
-
+    //libro
+    Route::get('/book',[BookController::class,'get']);
+    Route::post('/book',[BookController::class,'save']);
+    Route::put('/book/{id}',[BookController::class,'update']);
+    Route::delete('/book/{id}',[BookController::class,'delete']);
+    Route::post('/book/save',[SavedBookController::class,'save']);
+    Route::delete('book/delete/{id}',[SavedBookController::class,'delete']);
+    Route::get('/book/list',[SavedBookController::class,'get']);
+    //cita
+    Route::post('/cita',[CitaController::class,'save']);
+    Route::get('/cita',[CitaController::class,'get']);
+    Route::put('/cita/{id}',[CitaController::class,'update']);
+    Route::delete('/cita/{id}',[CitaController::class,'delete']);
 });
 Route::post('/upload',[FileController::class,'formSubmit']);
 Route::get('/image/{name}',[FileController::class,'downloadImage']);
