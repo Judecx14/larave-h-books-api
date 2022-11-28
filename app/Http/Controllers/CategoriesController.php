@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-
+use App\Models\Book;
 class CategoriesController extends Controller
 {
     function save(Request $request){
@@ -48,6 +48,15 @@ class CategoriesController extends Controller
         
         if($category->delete()){
             return response()->json(["status"=>TRUE,"message"=>"Se elimino correctamente"],200);
+        }else{
+            return response()->json(["status"=>FALSE,"message"=>"No se ha podido eliminar"],200);
+        }
+    }
+    
+    function books($id){
+        $books = Book::where('category_id',$id)->get();
+        if($books){
+            return response()->json(["status"=>TRUE,"message"=>$books],200);
         }else{
             return response()->json(["status"=>FALSE,"message"=>"No se ha podido eliminar"],200);
         }

@@ -28,6 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/categories',[CategoriesController::class,'save']);
     Route::put('/categories/{id}',[CategoriesController::class,'update']);
     Route::delete('/categories/{id}',[CategoriesController::class,'delete']);
+    Route::get('/categories/{id}/books',[CategoriesController::class,'books']);
     //libro
     Route::get('/book',[BookController::class,'get']);
     Route::post('/book',[BookController::class,'save']);
@@ -36,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/book/save',[SavedBookController::class,'save']);
     Route::delete('book/delete/{id}',[SavedBookController::class,'delete']);
     Route::get('/book/list',[SavedBookController::class,'get']);
+    Route::get('/book/search/{name}',[BookController::class,'name']);
     //cita
     Route::post('/cita',[CitaController::class,'save']);
     Route::get('/cita',[CitaController::class,'get']);

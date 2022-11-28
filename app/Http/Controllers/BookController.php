@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use App\Models\Book;
 
 class BookController extends Controller
@@ -116,5 +117,17 @@ class BookController extends Controller
             return response()->json(["status"=>FALSE,"message"=>"Algo salio mal"]);
         }
         
+    }
+
+    function name(Request $request,$name){
+        $book = DB::table('books')->where('titulo','like','%'.$name.'%')
+                                ->orWhere('autor','like','%'.$name.'%')
+                                ->orWhere('editorial','like','%'.$name.'%')
+                                ->get();
+        if($book){
+            return response()->json(["status"=>TRUE,"book"=>$book], 201);
+        }else {
+            return response()->json(["status"=>FALSE,"message"=>"Algo salio mal"]);
+        }
     }
 }
