@@ -28,16 +28,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/categories',[CategoriesController::class,'save']);
     Route::put('/categories/{id}',[CategoriesController::class,'update']);
     Route::delete('/categories/{id}',[CategoriesController::class,'delete']);
-    Route::get('/categories/{id}/books',[CategoriesController::class,'books']);
+    Route::get('/categories/{id}/books',[CategoriesController::class,'books']);//libros por categoria
     //libro
     Route::get('/book',[BookController::class,'get']);
     Route::post('/book',[BookController::class,'save']);
     Route::put('/book/{id}',[BookController::class,'update']);
     Route::delete('/book/{id}',[BookController::class,'delete']);
-    Route::post('/book/save',[SavedBookController::class,'save']);
-    Route::delete('book/delete/{id}',[SavedBookController::class,'delete']);
-    Route::get('/book/list',[SavedBookController::class,'get']);
-    Route::get('/book/search/{name}',[BookController::class,'name']);
+    Route::post('/book/save',[SavedBookController::class,'save']);//guardar libro en perfil
+    Route::delete('book/delete/{id}',[SavedBookController::class,'delete']);//borrar libro de perfil
+    Route::get('/book/list',[SavedBookController::class,'get']);//obtener libros de perfil
+    Route::get('/book/search/{name}',[BookController::class,'name']);//buscar libro por nombre, editor, o editorial
     //cita
     Route::post('/cita',[CitaController::class,'save']);
     Route::get('/cita',[CitaController::class,'get']);
