@@ -60,7 +60,9 @@ class BookController extends Controller
     }
 
     function get(Request $request){
-        $books = Book::all();
+        $books = DB::table('books')
+                    ->join('categories','books.category_id','=','categories.id')
+                    ->select('books.*','categories.categoria')->get();
         if($books){
             return response()->json(["status"=>TRUE,"books"=>$books], 201);
         }else {

@@ -25,7 +25,7 @@ class Book extends Model
      */
     public function Category(): HasOne
     {
-        return $this->hasOne(Cateory::class, 'id', 'category_id');
+        return $this->hasOne(Category::class, 'category_id');
     }
 
     /**
