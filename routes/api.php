@@ -38,11 +38,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('book/delete/{id}',[SavedBookController::class,'delete']);//borrar libro de perfil
     Route::get('/book/list',[SavedBookController::class,'get']);//obtener libros de perfil
     Route::get('/book/search/{name}',[BookController::class,'name']);//buscar libro por nombre, editor, o editorial
+    Route::get('/book/{id}',[BookController::class,'show']);//Lista el libro dependiendo del id
+
     //cita
     Route::post('/cita',[CitaController::class,'save']);
     Route::get('/cita',[CitaController::class,'get']);
     Route::put('/cita/{id}',[CitaController::class,'update']);
     Route::delete('/cita/{id}',[CitaController::class,'delete']);
+
+    //user
+    Route::get('/user',[UserController::class,'showByToken']);
+    Route::put('/user',[UserController::class,'update']);
 });
 Route::post('/upload',[FileController::class,'formSubmit']);
 Route::get('/image/{name}',[FileController::class,'downloadImage']);

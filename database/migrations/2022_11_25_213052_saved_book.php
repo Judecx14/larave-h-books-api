@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('saved_books', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             $table->timestamps();

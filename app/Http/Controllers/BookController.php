@@ -130,4 +130,14 @@ class BookController extends Controller
             return response()->json(["status"=>FALSE,"message"=>"Algo salio mal"]);
         }
     }
+
+
+    function show($id){
+        try {
+            $book = Book::find($id);
+            return response()->json(["status"=>TRUE,"message"=>"","libro"=>$book]);
+        } catch (\Throwable $th) {
+            return response()->json(["status"=>FALSE,"message"=>$th->getMessage()]);
+        }
+    }
 }
