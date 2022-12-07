@@ -23,6 +23,8 @@ use App\Http\Controllers\SavedBookController;
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[UserController::class,'registro']);
 Route::middleware(['auth:sanctum'])->group(function () {
+    //check
+    Route::get('/check',[AuthController::class,'check']);
     //categorias
     Route::get('/categories', [CategoriesController::class,'get']);
     Route::post('/categories',[CategoriesController::class,'save']);
