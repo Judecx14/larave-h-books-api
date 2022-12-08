@@ -21,6 +21,7 @@ use App\Http\Controllers\SavedBookController;
 |
 */
 Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout']);
 Route::post('/register',[UserController::class,'registro']);
 Route::middleware(['auth:sanctum'])->group(function () {
     //check
@@ -45,6 +46,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //cita
     Route::post('/cita',[CitaController::class,'save']);
     Route::get('/cita',[CitaController::class,'get']);
+    Route::get('/cita/random',[CitaController::class,'getRandom']);
     Route::put('/cita/{id}',[CitaController::class,'update']);
     Route::delete('/cita/{id}',[CitaController::class,'delete']);
 
