@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cita;
+use Illuminate\Support\Facades\DB;
+use App\Models\Book;
+
 class CitaController extends Controller
 {
     function save(Request $request){
@@ -19,7 +22,19 @@ class CitaController extends Controller
     }
 
     function get(){
-        $citas = Cita::all();
+        //$citas = Cita::all();
+        $citas = DB::table('citas')
+                ->join('books','books.id','=','citas.book_id')
+                ->select('citas.*','books.titulo')->get();
+        if($citas){
+            return response()->json(["status"=>TRUE,"citas"=>$citas], 201);
+        }else {
+            return response()->json(["status"=>FALSE,"message"=>"Algo salio mal"]);
+        }
+    }
+
+    function getRandom(){
+        $citas = DB::table('citas')->inRandomOrder()->limit(1)->get();
         if($citas){
             return response()->json(["status"=>TRUE,"citas"=>$citas], 201);
         }else {
