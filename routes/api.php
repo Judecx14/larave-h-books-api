@@ -21,6 +21,7 @@ use App\Http\Controllers\SavedBookController;
 |
 */
 Route::post('/login',[AuthController::class,'login']);
+Route::get('/logout',[AuthController::class,'logout']);
 Route::post('/register',[UserController::class,'registro']);
 Route::middleware(['auth:sanctum'])->group(function () {
     //check

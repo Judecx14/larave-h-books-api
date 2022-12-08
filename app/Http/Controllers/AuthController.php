@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -30,10 +32,12 @@ class AuthController extends Controller
         $token = $user->createToken($request->email,['user:user'])->plainTextToken; //Crea el token y se asignan permisos donde el request->email sea igual al que estan en la bd, despue retornas el token en texto plano 
         }
         
-        return response()->json(["status"=>TRUE,"token"=>$token,"rol"=>$user->rol,"id"=>$user->id],200);
+        return response()->json(["status"=>TRUE,"token"=>$token,"rol"=>$user->rol,"id"=>$user->id,"name"=>$user->name],200);
     }
 
     public function logout(Request $request){
+        $u = Auth::user()->tokens;
+        dd($u);
         return response()->json(["status"=>TRUE,"Tokens afectados" => $request->user()->tokens()->delete()],200);
     }
     
