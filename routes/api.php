@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/categories/{id}/books',[CategoriesController::class,'books']);//libros por categoria
     //libro
     Route::get('/book',[BookController::class,'get']);
+    Route::get('/book/random',[BookController::class,'getRandom']);
     Route::post('/book',[BookController::class,'save']);
     Route::put('/book/{id}',[BookController::class,'update']);
     Route::delete('/book/{id}',[BookController::class,'delete']);

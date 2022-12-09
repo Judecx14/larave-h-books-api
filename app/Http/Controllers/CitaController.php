@@ -34,7 +34,10 @@ class CitaController extends Controller
     }
 
     function getRandom(){
-        $citas = DB::table('citas')->inRandomOrder()->limit(1)->get();
+        $citas = DB::table('citas')
+                ->join('books','books.id','=','citas.book_id')
+                ->select('citas.*','books.titulo','books.imagen','books.autor')
+                ->inRandomOrder()->limit(1)->get();
         if($citas){
             return response()->json(["status"=>TRUE,"citas"=>$citas], 201);
         }else {

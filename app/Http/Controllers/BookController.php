@@ -20,7 +20,7 @@ class BookController extends Controller
             'edicion'=>'required|string|min:1|max:100',
             'año_lanzamiento'=>'required|string|min:1',
             'sinopsis'=>'required|min:1',
-            'pdf'=>'required|mimes:pdf|min:1|max:200',
+            'pdf'=>'required|mimes:pdf|min:1|max:10240',
             'imagen'=>'required|mimes:jpg,jpeg,png|min:1|max:10240',
         ]);
 
@@ -63,6 +63,18 @@ class BookController extends Controller
         $books = DB::table('books')
                     ->join('categories','books.category_id','=','categories.id')
                     ->select('books.*','categories.categoria')->get();
+        if($books){
+            return response()->json(["status"=>TRUE,"books"=>$books], 201);
+        }else {
+            return response()->json(["status"=>FALSE,"message"=>"Algo salio mal"]);
+        }
+    }
+
+    function getRandom(Request $request){
+        $books = DB::table('books')
+                    ->join('categories','books.category_id','=','categories.id')
+                    ->select('books.*','categories.categoria')
+                    ->inRandomOrder()->limit(30)->get();
         if($books){
             return response()->json(["status"=>TRUE,"books"=>$books], 201);
         }else {
